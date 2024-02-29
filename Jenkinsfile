@@ -1,3 +1,4 @@
+def registry = 'https://valaxy2022.jfrog.io/'
 pipeline {
     agent {
         node {
@@ -33,7 +34,7 @@ environment {
                           "files": [
                             {
                               "pattern": "jarstaging/(*)",
-                              "target": "1-libs-release-local/{1}",
+                              "target": "valaxy-libs-release-local/{1}",
                               "flat": "false",
                               "props" : "${properties}",
                               "exclusions": [ "*.sha1", "*.md5"]
