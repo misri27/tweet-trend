@@ -1,4 +1,4 @@
-def registry = 'https://valaxy2022.jfrog.io/'
+def registry = https://valaxy2022.jfrog.io/
 pipeline {
     agent {
         node {
@@ -17,7 +17,13 @@ environment {
                  echo "----------- build complted ----------"
             }
         }
-        
+        stage("test"){
+            steps{
+                echo "----------- unit test started ----------"
+                sh 'mvn surefire-report:report'
+                 echo "----------- unit test Complted ----------"
+            }
+        }
         stage("Jar Publish") {
         steps {
             script {
@@ -28,7 +34,9 @@ environment {
                           "files": [
                             {
                               "pattern": "jarstaging/(*)",
-                              "target": "valaxy-libs-release-local/{1}",
+                              "target": "valaxy
+                              
+                              -libs-release-local/{1}",
                               "flat": "false",
                               "props" : "${properties}",
                               "exclusions": [ "*.sha1", "*.md5"]
@@ -39,6 +47,9 @@ environment {
                      buildInfo.env.collect()
                      server.publishBuildInfo(buildInfo)
                      echo '<--------------- Jar Publish Ended --------------->'  
+             }
+        }   
+    }
         
 }
 }
